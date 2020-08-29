@@ -14,7 +14,9 @@ namespace OgrencidenWebApi.Models
             AdAndCategories = new List<AdAndCategory>();
         }
         public int AdId { get; set; }
+        public string AdTitle { get; set; }
         public string AdInfo { get; set; }
+        public double Price { get; set; }
         public DateTime AdDate { get; set; }
         public DateTime AdValidDate { get; set; }
         public User User { get; set; }
