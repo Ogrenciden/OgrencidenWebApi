@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OgrencidenWebApi.Data;
+using OgrencidenWebApi.Repository;
 
 namespace OgrencidenWebApi
 {
@@ -32,6 +33,7 @@ namespace OgrencidenWebApi
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddScoped<IAppRepository, AppRepository>();
             services.AddCors();
         }
 
