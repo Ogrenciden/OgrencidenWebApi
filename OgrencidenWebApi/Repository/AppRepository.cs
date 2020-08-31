@@ -1,56 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using OgrencidenWebApi.Data;
 using OgrencidenWebApi.Models;
 
 namespace OgrencidenWebApi.Repository
 {
     public class AppRepository : IAppRepository
     {
+        private DataContext _context;
+
+        public AppRepository(DataContext context)
+        {
+            _context = context;
+        }
+
         public void Add<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            _context.Add(entity);
         }
 
         public void Delete<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            _context.Remove(entity);
         }
 
         public bool SaveAll()
         {
-            throw new NotImplementedException();
+            return _context.SaveChanges() > 0;
         }
 
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            var users = _context.Users.ToList();
+            return users;
         }
 
         public User GetUserById(int userId)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.Where(u => u.UserId == userId);
+            return user as User;
         }
 
         public List<Ad> GetAllAd()
         {
-            throw new NotImplementedException();
+            var ads = _context.Ads.ToList();
+            return ads;
         }
 
         public Ad GetAdById(int adId)
         {
-            throw new NotImplementedException();
+            var ad = _context.Ads.Where(a => a.AdId == adId);
+            return ad as Ad;
         }
 
         public List<Photo> GetPhotosByAdId(int addId)
         {
-            throw new NotImplementedException();
+            var adPhotos = _context.Photos.Where(p => p.Ad.AdId == addId).ToList();
+            return adPhotos;
         }
 
-        public List<FavAds> GetFavAdses()
+        public List<FavAds> GetFavAdses(int userId, int adId)
         {
-            throw new NotImplementedException();
+
+
+            var favAds = _context.FavAdses.Where(u => u.User.UserId == userId).Where(a => a.Ad.AdId == adId).ToList();
+            return favAds;
         }
     }
 }

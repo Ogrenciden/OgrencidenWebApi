@@ -17,7 +17,7 @@ namespace OgrencidenWebApi.Repository
         List<Ad> GetAllAd();
         Ad GetAdById(int adId);
         List<Photo> GetPhotosByAdId(int addId);
-        List<FavAds> GetFavAdses();
+        List<FavAds> GetFavAdses(int userId, int adId);
 
 
 
