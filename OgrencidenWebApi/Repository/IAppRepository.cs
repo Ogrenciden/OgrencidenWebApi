@@ -22,5 +22,6 @@ namespace OgrencidenWebApi.Repository
 
 
 
+
     }
 }
