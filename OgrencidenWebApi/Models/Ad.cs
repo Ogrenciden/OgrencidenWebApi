@@ -7,6 +7,15 @@ namespace OgrencidenWebApi.Models
 {
     public class Ad
     {
+
+        /*
+         *
+         * Todo
+         *
+         * add a isSold prop
+         *
+         */
+
         public Ad()
         {
             Photos = new List<Photo>();
@@ -19,6 +28,8 @@ namespace OgrencidenWebApi.Models
         public double Price { get; set; }
         public DateTime AdDate { get; set; }
         public DateTime AdValidDate { get; set; }
+        public string City { get; set; }
+        public bool IsSold { get; set; }
         public User User { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public Category Category { get; set; }

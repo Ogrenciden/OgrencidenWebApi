@@ -46,7 +46,7 @@ namespace OgrencidenWebApi.Repository
 
         public List<Ad> GetAllAd()
         {
-            var ads = _context.Ads.ToList();
+            var ads = _context.Ads.Include(p => p.Photos).Include(u => u.User).ToList();
             return ads;
         }
 
@@ -56,15 +56,46 @@ namespace OgrencidenWebApi.Repository
             return ad;
         }
 
-        public List<Photo> GetPhotosByAdId(int addId)
+        public IQueryable<Photo> GetPhotosByAdId(int addId)
         {
-            var adPhotos = _context.Photos.Where(p => p.Ad.AdId == addId).ToList();
+            var adPhotos = _context.Photos.Where(a => a.Ad.AdId == addId);
             return adPhotos;
         }
-        public List<FavAds> GetFavAdses(int userId, int adId)
+        public IQueryable<FavAds> GetFavAdses(int userId)
         {
-            var favAds = _context.FavAdses.Where(u => u.User.UserId == userId).Where(a => a.Ad.AdId == adId).ToList();
+            var favAds = _context.FavAdses.Where(u => u.User.UserId == userId)
+                .Where(adc => adc.User.FavAdses.Any(fa => fa.UserId == userId)).Include(a => a.Ad);
             return favAds;
+        }
+
+        public List<Ad> GetAdsByCategory(int categoryId)
+        {
+            var ads = _context.Ads.Include(p => p.Photos).Where(ad => ad.Category.CategoryId == categoryId).ToList();
+            return ads;
+        }
+
+        public List<Ad> GetAdByCity(string cityName)
+        {
+            var ads = _context.Ads.Include(p => p.Photos).Where(c => c.City == cityName).ToList();
+            return ads;
+        }
+
+        public List<Ad> GetAdByDateAsc()
+        {
+            var ads = _context.Ads.Include(p => p.Photos).OrderBy(d => d.AdDate).ToList();
+            return ads;
+        }
+
+        public List<Ad> GetAdByDateDesc()
+        {
+            var ads = _context.Ads.Include(p => p.Photos).OrderByDescending(a => a.AdDate).ToList();
+            return ads;
+        }
+
+        public IQueryable<Ad> GetUserSoldAds(int userId)
+        {
+            var ads = _context.Ads.Include(p => p.Photos).Where(u => u.User.UserId == userId).Where(u => u.IsSold);
+            return ads;
         }
     }
 }

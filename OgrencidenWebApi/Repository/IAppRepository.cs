@@ -12,12 +12,17 @@ namespace OgrencidenWebApi.Repository
         void Delete<T>(T entity) where T : class;
         bool SaveAll();
 
-        List<User> GetUsers();
         User GetUserById(int userId);
         List<Ad> GetAllAd();
         Ad GetAdById(int adId);
-        List<Photo> GetPhotosByAdId(int addId);
-        List<FavAds> GetFavAdses(int userId, int adId);
+        IQueryable<Photo> GetPhotosByAdId(int addId);
+        IQueryable<FavAds> GetFavAdses(int userId);
+        List<Ad> GetAdsByCategory(int categoryId);
+        List<Ad> GetAdByCity(string cityName);
+        List<Ad> GetAdByDateAsc();
+        List<Ad> GetAdByDateDesc();
+
+        IQueryable<Ad> GetUserSoldAds(int userId);
 
 
 
