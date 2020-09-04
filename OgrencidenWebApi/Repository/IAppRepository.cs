@@ -22,6 +22,7 @@ namespace OgrencidenWebApi.Repository
         List<Ad> GetAdByDateAsc();
         List<Ad> GetAdByDateDesc();
 
+
         IQueryable<Ad> GetUserSoldAds(int userId);
 
 

@@ -97,5 +97,11 @@ namespace OgrencidenWebApi.Repository
             var ads = _context.Ads.Include(p => p.Photos).Where(u => u.User.UserId == userId).Where(u => u.IsSold);
             return ads;
         }
+
+        public List<Ad> GetAllAds()
+        {
+            var ads = _context.Ads.Include(p => p.Photos).ToList();
+            return ads;
+        }
     }
 }

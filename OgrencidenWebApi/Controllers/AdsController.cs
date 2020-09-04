@@ -18,7 +18,7 @@ namespace OgrencidenWebApi.Controllers
             _appRepository = appRepository;
         }
 
-        [HttpGet("getads")]
+        [HttpGet]
         public IActionResult GetAds()
         {
             var ads = _appRepository.GetAllAd();
