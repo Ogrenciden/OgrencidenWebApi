@@ -32,75 +32,76 @@ namespace OgrencidenWebApi.Repository
             return _context.SaveChanges() > 0;
         }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
-            var users = _context.Users.ToList();
+            var users = await _context.Users.ToListAsync();
             return users;
         }
 
-        public User GetUserById(int userId)
+        public async Task<User> GetUserById(int userId)
         {
-            var user = _context.Users.FirstOrDefault(u => u.UserId == userId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
             return user;
         }
 
-        public List<Ad> GetAllAd()
+        public async Task<List<Ad>> GetAllAd()
         {
-            var ads = _context.Ads.Include(p => p.Photos).Include(u => u.User).ToList();
+            var ads = await _context.Ads.Include(p => p.Photos).Include(u => u.User).ToListAsync();
             return ads;
         }
 
-        public Ad GetAdById(int adId)
+        public async Task<Ad> GetAdById(int adId)
         {
-            var ad = _context.Ads.Include(p => p.Photos).FirstOrDefault(a => a.AdId == adId);
+            var ad = await _context.Ads.Include(p => p.Photos).FirstOrDefaultAsync(a => a.AdId == adId);
             return ad;
         }
 
-        public IQueryable<Photo> GetPhotosByAdId(int addId)
+        public async Task<List<Photo>> GetPhotosByAdId(int addId)
         {
-            var adPhotos = _context.Photos.Where(a => a.Ad.AdId == addId);
+            var adPhotos = await _context.Photos.Where(a => a.Ad.AdId == addId).ToListAsync();
             return adPhotos;
         }
-        public IQueryable<FavAds> GetFavAdses(int userId)
+        public async Task<List<FavAds>> GetFavAdses(int userId)
         {
-            var favAds = _context.FavAdses.Where(u => u.User.UserId == userId)
-                .Where(adc => adc.User.FavAdses.Any(fa => fa.UserId == userId)).Include(a => a.Ad);
+            var favAds = await _context.FavAdses.Where(u => u.User.UserId == userId)
+                .Where(adc => adc.User.FavAdses.Any(fa => fa.UserId == userId)).Include(a => a.Ad).ToListAsync();
             return favAds;
         }
 
-        public List<Ad> GetAdsByCategory(int categoryId)
+        public async Task<List<Ad>> GetAdsByCategory(int categoryId)
         {
-            var ads = _context.Ads.Include(p => p.Photos).Where(ad => ad.Category.CategoryId == categoryId).ToList();
+            var ads = await _context.Ads.Include(p => p.Photos).Where(ad => ad.Category.CategoryId == categoryId)
+                .ToListAsync();
             return ads;
         }
 
-        public List<Ad> GetAdByCity(string cityName)
+        public async Task<List<Ad>> GetAdByCity(string cityName)
         {
-            var ads = _context.Ads.Include(p => p.Photos).Where(c => c.City == cityName).ToList();
+            var ads = await _context.Ads.Include(p => p.Photos).Where(c => c.City == cityName).ToListAsync();
             return ads;
         }
 
-        public List<Ad> GetAdByDateAsc()
+        public async Task<List<Ad>> GetAdByDateAsc()
         {
-            var ads = _context.Ads.Include(p => p.Photos).OrderBy(d => d.AdDate).ToList();
+            var ads = await _context.Ads.Include(p => p.Photos).OrderBy(d => d.AdDate).ToListAsync();
             return ads;
         }
 
-        public List<Ad> GetAdByDateDesc()
+        public async Task<List<Ad>> GetAdByDateDesc()
         {
-            var ads = _context.Ads.Include(p => p.Photos).OrderByDescending(a => a.AdDate).ToList();
+            var ads = await _context.Ads.Include(p => p.Photos).OrderByDescending(a => a.AdDate).ToListAsync();
             return ads;
         }
 
-        public IQueryable<Ad> GetUserSoldAds(int userId)
+        public async Task<List<Ad>> GetUserSoldAds(int userId)
         {
-            var ads = _context.Ads.Include(p => p.Photos).Where(u => u.User.UserId == userId).Where(u => u.IsSold);
+            var ads = await _context.Ads.Include(p => p.Photos).Where(u => u.User.UserId == userId).Where(u => u.IsSold).ToListAsync();
             return ads;
         }
 
-        public List<Ad> GetAllAds()
+        public async Task<List<Ad>> GetAllAds()
         {
-            var ads = _context.Ads.Include(p => p.Photos).ToList();
+            var ads = await _context.Ads.Include(p => p.Photos).ToListAsync();
             return ads;
         }
     }

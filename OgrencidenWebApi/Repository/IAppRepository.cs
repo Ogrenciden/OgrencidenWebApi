@@ -12,20 +12,17 @@ namespace OgrencidenWebApi.Repository
         void Delete<T>(T entity) where T : class;
         bool SaveAll();
 
-        User GetUserById(int userId);
-        List<Ad> GetAllAd();
-        Ad GetAdById(int adId);
-        IQueryable<Photo> GetPhotosByAdId(int addId);
-        IQueryable<FavAds> GetFavAdses(int userId);
-        List<Ad> GetAdsByCategory(int categoryId);
-        List<Ad> GetAdByCity(string cityName);
-        List<Ad> GetAdByDateAsc();
-        List<Ad> GetAdByDateDesc();
-
-
-        IQueryable<Ad> GetUserSoldAds(int userId);
-
-
+        Task<User> GetUserById(int userId);
+        Task<List<Ad>> GetAllAd();
+        Task<Ad> GetAdById(int adId);
+        Task<List<Photo>> GetPhotosByAdId(int addId);
+        Task<List<FavAds>> GetFavAdses(int userId);
+        Task<List<Ad>> GetAdsByCategory(int categoryId);
+        Task<List<Ad>> GetAdByCity(string cityName);
+        Task<List<Ad>> GetAdByDateAsc();
+        Task<List<Ad>> GetAdByDateDesc();
+        Task<List<Ad>> GetUserSoldAds(int userId);
+        Task<List<Ad>> GetAllAds();
 
 
 

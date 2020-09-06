@@ -22,68 +22,69 @@ namespace OgrencidenWebApi.Controllers
         public IActionResult GetAds()
         {
             var ads = _appRepository.GetAllAd();
+
             return Ok(ads);
         }
 
         [HttpGet("getfavads")]
-        public IActionResult GetFavAds(int userId)
+        public async Task<IActionResult> GetFavAds(int userId)
         {
-            var ads = _appRepository.GetFavAdses(userId);
+            var ads = await _appRepository.GetFavAdses(userId);
             return Ok(ads);
         }
 
         [HttpGet("getUser")]
-        public IActionResult GetUser(int userId)
+        public async Task<IActionResult> GetUser(int userId)
         {
-            var user = _appRepository.GetUserById(userId);
+            var user = await _appRepository.GetUserById(userId);
             return Ok(user);
         }
 
         [HttpGet("getadbycity")]
-        public IActionResult GetAdByCity(string cityName)
+        public async Task<IActionResult> GetAdByCity(string cityName)
         {
-            var ads = _appRepository.GetAdByCity(cityName);
+            var ads = await _appRepository.GetAdByCity(cityName);
             return Ok(ads);
         }
 
         [HttpGet("getadsbycategory")]
-        public IActionResult GetAdsByCategory(int categoryId)
+        public async Task<IActionResult> GetAdsByCategory(int categoryId)
         {
-            var ads = _appRepository.GetAdsByCategory(categoryId);
+            var ads = await _appRepository.GetAdsByCategory(categoryId);
             return Ok(ads);
         }
 
         [HttpGet("getadbydateasc")]
-        public IActionResult GetAdByDate()
+        public async Task<ActionResult> GetAdByDate()
         {
-            var ads = _appRepository.GetAdByDateAsc();
+            var ads = await _appRepository.GetAdByDateAsc();
             return Ok(ads);
         }
         [HttpGet("getadbydatedesc")]
-        public IActionResult GetAdByDateDesc()
+        public async Task<ActionResult> GetAdByDateDesc()
         {
-            var ads = _appRepository.GetAdByDateDesc();
+            var ads = await _appRepository.GetAdByDateDesc();
             return Ok(ads);
         }
 
         [HttpGet("getusersoldads")]
-        public IActionResult GetUserSoldAds(int userId)
+        public async Task<IActionResult> GetUserSoldAds(int userId)
         {
-            var ads = _appRepository.GetUserSoldAds(userId);
+            var ads = await _appRepository.GetUserSoldAds(userId);
             return Ok(ads);
         }
 
         [HttpGet("getadbyid")]
-        public IActionResult GetAdById(int adId)
+        public async Task<IActionResult> GetAdById(int adId)
         {
-            var ads = _appRepository.GetAdById(adId);
+            var ads = await _appRepository.GetAdById(adId);
             return Ok(ads);
         }
 
         [HttpGet("getadphotos")]
-        public IActionResult GetAdPhotos(int adId)
+        public async Task<IActionResult> GetAdPhotos(int adId)
         {
-            var photos = _appRepository.GetPhotosByAdId(adId);
+            var photos = await _appRepository.GetPhotosByAdId(adId);
             return Ok(photos);
 
         }
