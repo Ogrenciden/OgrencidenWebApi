@@ -1,7 +1,7 @@
 ### Relational WEB API
 
 
-This is the my first .NET CORE WEB API with Code First in learning phase
+This is the my first .NET CORE WEB API with Code First in learning phase. It's a very simple Let-Go clone.
 
 [V]  `One to Many Relation` 
 [V]  `Many to Many Relation` 
